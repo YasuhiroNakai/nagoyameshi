@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+ 
+{% block title %}クレジットカード情報削除{% endblock %}
+{% block content %}
+<h1>クレジットカード情報削除</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <a>有料会員を解約しますか？</a>
+    <br>    
+    <button type="submit">有料会員解約</button><br>
+</form>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+ 
+{% block title %}会員情報更新{% endblock %}
+{% block content %}
+<h1>会員情報更新</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <a>会員名：</a>
+    <input type="text" name="username" value="{{user.username}}"/><br>
+    <a>アドレス：</a>
+    <input type="text" name="email" value="{{user.email}}"/><br>
+    <button type="submit">会員情報更新</button><br>
+</form>
+
+{% if user.is_subscribed %}
+    <a href="{% url 'cordinfo_update' %}">クレジットカード情報更新</a>
+{% else %}
+    <a href="{% url 'cordinfo_update' %}">クレジットカード情報登録</a>
+{% endif %}
+
+
+{% endblock %}

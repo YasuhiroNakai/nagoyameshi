@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}店舗一覧{% endblock %}
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <select size="1" name="budget">
+            <option value="budget" {% if selectorder == 'budget' %} selected {% endif %}>予算安い順</option>
+            <option value="-budget" {% if selectorder == '-budget' %} selected {% endif %}>予算高い順</option>
+            <option value="evaluation" {% if selectorder == 'evaluation' %} selected {% endif %}>評価の低い順</option>
+            <option value="-evaluation" {% if selectorder == '-evaluation' %} selected {% endif %}>評価の高い順</option>
+        </select>
+    </p>
+    <p>
+        <select size="1" name="lowprice">
+            <option value=500 {% if lowprice == '500' %} selected {% endif %}>500</option>
+            <option value=1000 {% if lowprice == '1000' %} selected {% endif %}>1000</option>
+            <option value=2000 {% if lowprice == '2000' %} selected {% endif %}>2000</option>
+            <option value=3000 {% if lowprice == '3000' %} selected {% endif %}>3000</option>
+            <option value=4000 {% if lowprice == '4000' %} selected {% endif %}>4000</option>
+            <option value=5000 {% if lowprice == '5000' %} selected {% endif %}>5000</option>
+        </select>
+        <a>～</a>
+        <select size="1" name="highprice">
+            <option value=5000 {% if highprice == '5000' %} selected {% endif %}>5000</option>
+            <option value=4000 {% if highprice == '4000' %} selected {% endif %}>4000</option>
+            <option value=3000 {% if highprice == '3000' %} selected {% endif %}>3000</option>
+            <option value=2000 {% if highprice == '2000' %} selected {% endif %}>2000</option>
+            <option value=1000 {% if highprice == '1000' %} selected {% endif %}>1000</option>
+            <option value=500 {% if highprice == '500' %} selected {% endif %}>500</option>
+        </select>
+    </p>
+    <p>
+        <select size="1" name="evaluation">
+            <option value='★' {% if evaluation == '★' %} selected {% endif %}>★</option>
+            <option value='★★' {% if evaluation == '★★' %} selected {% endif %}>★★</option>
+            <option value='★★★' {% if evaluation == '★★★' %} selected {% endif %}>★★★</option>
+            <option value='★★★★' {% if evaluation == '★★★★' %} selected {% endif %}>★★★★</option>
+            <option value='★★★★★' {% if evaluation == '★★★★★' %} selected {% endif %}>★★★★★</option>
+        </select>
+    </p>
+    <button type="submit">並び替え</button> 
+</form>
+
+<h1>店舗一覧</h1>
+<table class="table table-striped table-hover table-bordered">
+    
+    <thead>
+        <tr>
+            <th>No,</th>
+            <th>店舗名：</th>
+            <th>カテゴリー</th>
+            <th>住所</th>
+            <th>評価</th>
+            <th>予算</th>
+            <th>定休日</th>
+        </tr>
+    </thead>
+    {% for Restaurant in object_list %}
+    <tr>
+        <td>{{ Restaurant.id }}</td>
+        <td><a href="{% url 'restaurant_detail' Restaurant.pk %}?keyword={{ keyword }}&category={{ category }}&restaurantid={{ Restaurant.id }}">{{ Restaurant.name }}</a></td>
+        <td>{{ Restaurant.category }} </td>
+        <td>{{ Restaurant.address }} </td>
+        <td>{{ Restaurant.evaluation }} </td>
+        <td>{{ Restaurant.budget }} </td>
+        <td>{{ Restaurant.RegularHoliday }} </td>
+    </tr>
+    {% endfor %}
+    <a href="{% url 'top' %}">戻る</a>
+</table>
+
+{# ページの表示 #}
+{% if page_obj.paginator.num_pages > 1 %}
+    {{ page_obj.number }} / {{ page_obj.paginator.num_pages }} ページ<br>
+
+    {# 前へ #}
+    {% if page_obj.has_previous %}
+    <a href="?page=1&keyword={{ keyword }}&category={{ category }}">&laquo; 先頭</a>
+    <a href="?page={{ page_obj.previous_page_number }}&keyword={{ keyword }}&category={{ category }}">前へ</a>
+    {% else %}
+    <a>先頭</a>
+    <a>前へ</a>
+    {% endif %}
+
+    {# 次へ #}
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}&keyword={{ keyword }}&category={{ category }}">次へ</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}&keyword={{ keyword }}&category={{ category }}">最後 &raquo;</a>
+    {% else %}
+    <a>次へ</a>
+    <a>最後</a>
+    {% endif %}
+{% endif %}
+{% endblock %}
+</body>
+</html>

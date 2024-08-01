@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+ 
+{% block title %}クレジットカード情報更新{% endblock %}
+{% block content %}
+<h1>クレジットカード情報</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <a>カードNo：</a>
+    <input type="text" name="cord_number" value="{{ user.cord_number|default:'' }}"/><br>
+    <a>有効期限：</a>
+    <input type="text" name="date_of_expiry" value="{{ user.date_of_expiry|default:'' }}"/><br>
+    <a>セキュリティキー</a>
+    <input type="text" name="security_key" value="{{ user.security_key|default:'' }}"/><br>
+    <br>    
+    <button type="submit">カード情報更新</button><br>
+    <a href="{% url 'cordinfo_delete' %}">有料会員解約</a>
+</form>
+{% endblock %}

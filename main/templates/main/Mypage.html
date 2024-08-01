@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+ 
+{% block title %}Nagoyaめし{% endblock %}
+{% block content %}
+<h1>マイページ</h1>
+<table class="table table-striped table-hover table-bordered">
+<form action="{% url 'reservation_list' %}">
+    <a>会員名：</a>
+    {{ user.username }}<br>
+    <a>アドレス：</a>
+    {{ user.email }}<br>
+    <a>契約状態：</a>
+    {% if user.is_subscribed %}
+        有料会員
+    {% else %}    
+        無料会員
+    {% endif %}
+    <br>    
+    <a>登録日時：</a>
+    {{ user.date_joined }}<br>
+    <button class="btn-primary">予約確認</button><br>
+    <a href="{% url 'member_update' %}">会員情報変更</a><br>
+    <a href="{% url 'top' %}">Top</a>
+</form>
+</table>
+{% endblock %}

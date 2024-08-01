@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+ 
+{% block title %}予約更新{% endblock %}
+{% block content %}
+<h1>予約更新</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    
+    <br>
+    <a href="{% url 'reservation_list' %}?restaurantid={{ review.restaurantid }}">戻る</a>
+    <form action="{% url 'reservation_list' %}?restaurantid={{ review.restaurantid }}" method="get">
+        <input type="submit" class="btn btn-primary" value="更新">
+    </form>
+</form>
+{% endblock %}

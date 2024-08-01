@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}会員解約{% endblock %}
+{% block content %}
+<h1>会員解約</h1>
+
+<form method="post">
+    {% csrf_token %}
+    以下の予約を取消してもよろしいですか？<br><br>
+    <th>投稿日時：</th>{{ member.datetime }}<br>
+    <th>投稿者：</th>{{ member.username }}<br>
+    <th>評価：</th>{{ member.evaluation }}<br>
+    <th>投稿内容：</th>{{ member.postcontent }}<br><br>
+    <a href="{% url 'reviewlist' %}?restaurantid={{ review.restaurantid }}">戻る</a>
+    <a type="submit" class="btn btn-danger" href="{% url 'reviewlist' %}?restaurantid={{ review.restaurantid }}">削除</a>
+    <input type="submit" class="btn btn-danger" value="削除">
+</form>
+{% endblock %}

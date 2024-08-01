@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+ 
+{% block title %}レビュー投稿{% endblock %}
+{% block content %}
+<h1>レビュー投稿</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    <a href="{% url 'review_list' restaurantid %}?keyword={{ keyword }}&category={{ category }}&restaurantid={{ restaurantid }}">戻る</a>
+    <input type="submit" class="btn btn-primary" value="登録"><br>
+    <a href="{% url 'top' %}">Top</a>
+</form>
+
+
+{% endblock %}

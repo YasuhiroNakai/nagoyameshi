@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block title %}店舗情報{% endblock %}
+{% block content %}
+<h1>店舗情報</h1>
+{{restaurant}}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <th>店舗名：</th><td>{{ restaurant.name }}</td><br>
+    <th>カテゴリー：</th><td>{{ restaurant.category }}</td><br>
+    <th>住所：</th><td>{{ restaurant.address }}</th><br>
+    <th>評価：</th><td>{{ restaurant.evaluation }}</th><br>
+    <th>予算：</th><td>{{ restaurant.budget }}</th><br>
+
+        
+    <th>定休日：</th><td>{{ restaurant.regularholiday }}</th><br>
+    <a input type="submit" class="btn btn-primary" href="{% url 'review_list' restaurant.id %}?keyword={{ keyword }}&category={{ category }}&restaurantid={{ restaurant.id }}">レビュー</a>
+    <a input type="submit" class="btn btn-primary" href="{% url 'reservation_create' %}?keyword={{ keyword }}&category={{ category }}&restaurantid={{ restaurant.id }}">予約</a><br>
+    <a href="{% url 'restaurant_list' %}?keyword={{ keyword }}&category={{ category }}">戻る</a>
+</form>
+{% endblock %}

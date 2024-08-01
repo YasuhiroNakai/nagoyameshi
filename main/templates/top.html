@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+ 
+{% block title %}Nagoyaめし{% endblock %}
+{% block content %}
+<h1>店舗検索</h1>
+
+<a>ログイン時間：{{ now }}</a><br>
+
+<table class="table table-striped table-hover table-bordered">
+<form action="{% url 'restaurant_list' %}">
+    <a>キーワード　</a>
+    <input type="text" name="keyword" value=""/><br>
+    <a>カテゴリー　</a>
+    <input type="text" name="category" value=""/><br>
+    <button class="btn-primary">検索</button><br>
+</form>
+</table>
+{% endblock %}

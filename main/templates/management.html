@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+ 
+{% block title %}Nagoyaめし{% endblock %}
+{% block content %}
+<h1>管理画面</h1>
+{{ now }}<br>
+<button class="btn-primary", href="{% url 'management' %}">管理画面</button><br>
+<button class="btn-primary", href="{% url 'member_list' %}">会員一覧</button><br>
+<button class="btn-primary", href="{% url 'restaurant_list' %}">店舗一覧</button><br>
+<button class="btn-primary", href="{% url 'member_create' %}">カテゴリ一覧</button><br>
+<a href="{% url 'top' %}">Top</a>
+</table>
+{% endblock %}
