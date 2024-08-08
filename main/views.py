@@ -78,7 +78,7 @@ class ContextMixin:
 class RestaurantDetailView(DetailView):
     model = Restaurant
     fields = '__all__'
-    template_name_suffix = '_detail_form'
+    template_name = 'main/Restaurant_Detail_form.html'
 
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
