@@ -188,7 +188,7 @@ class ReviewListView(ListView):
 class ReviewCreateView(CreateView):
     model = Review
     fields = '__all__'
-    template_name_suffix = '_Create_form'
+    template_name = 'main/Review_Create_form.html'
 
     def get_initial(self):
         initial = super().get_initial()
@@ -212,7 +212,7 @@ class ReviewCreateView(CreateView):
 class ReviewUpdateView(UpdateView):
     model = Review
     fields = '__all__'
-    template_name_suffix = '_Update_form'
+    template_name = 'main/Review_Update_form.html'
 
     def get_context_data(self, **kwargs):
         restaurantid = self.request.GET.get('restaurantid')
@@ -230,7 +230,7 @@ class ReviewUpdateView(UpdateView):
 class ReviewDeleteView(DeleteView):
     model = Review
     fields = '__all__'
-    template_name_suffix = '_Delete_form'
+    template_name = 'main/Review_Delete_form.html'
     success_url = reverse_lazy('review_list')
 
     def get_context_data(self, **kwargs):
@@ -264,7 +264,7 @@ class ReservationListView(ListView):
 class ReservationCreateView(CreateView):
     model = Reservation
     fields = '__all__'
-    template_name_suffix = '_Create_form'
+    template_name = 'main/Reservation_Create_form.html'
 
     def get_initial(self):
         initial = super().get_initial()
@@ -283,7 +283,7 @@ class ReservationCreateView(CreateView):
 class ReservationUpdateView(UpdateView):
     model = Reservation
     fields = '__all__'
-    template_name_suffix = '_Update_form'
+    template_name = 'main/Reservation_Update_form.html'
 
     def get_context_data(self, **kwargs):
         restaurantid = self.request.GET.get('restaurantid')
@@ -296,12 +296,12 @@ class ReservationUpdateView(UpdateView):
     def get_success_url(self):
         pk = self.kwargs['pk']
         restaurant_id = Reservation.objects.filter(id=pk).first().restaurantid
-        return reverse_lazy('review_list', kwargs={'pk': restaurant_id})
+        return reverse_lazy('reservation_list')
 
 class ReservationDeleteView(DeleteView):
     model = Reservation
     fields = '__all__'
-    template_name_suffix = '_Delete_form'
+    template_name = 'main/Reservation_Delete_form.html'
     success_url = reverse_lazy('review_list')
 
     def get_context_data(self, **kwargs):
@@ -315,8 +315,8 @@ class ReservationDeleteView(DeleteView):
 
     def get_success_url(self):
         pk = self.kwargs['pk']
-        restaurant_id = Reservation.objects.filter(id=pk).first().restaurantid
-        return reverse_lazy('review_list', kwargs={'pk': restaurant_id})
+        print('pk',pk)
+        return reverse_lazy('reservation_list')
 
 class MemberListView(ListView):
     model = Member
@@ -335,7 +335,7 @@ class MemberListView(ListView):
 class MemberCreateView(CreateView):
     model = Member
     fields = '__all__'
-    template_name_suffix = '_Create_form'
+    template_name = 'main/Member_Create_form.html'
 
     def get_initial(self):
         initial = super().get_initial()
@@ -430,7 +430,7 @@ class CordInfoDeleteform(View):
 class MemberDeleteView(DeleteView):
     model = Member
     fields = '__all__'
-    template_name_suffix = '_Delete_form'
+    template_name = 'main/Member_Delete_form.html'
     success_url = reverse_lazy('member_list')
 
     def get_context_data(self, **kwargs):

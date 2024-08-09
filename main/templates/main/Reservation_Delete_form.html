@@ -7,12 +7,14 @@
 <form method="post">
     {% csrf_token %}
     以下の予約を取消してもよろしいですか？<br><br>
-    <th>投稿日時：</th>{{ review.datetime }}<br>
-    <th>投稿者：</th>{{ review.username }}<br>
-    <th>評価：</th>{{ review.evaluation }}<br>
-    <th>投稿内容：</th>{{ review.postcontent }}<br><br>
-    <a href="{% url 'reviewlist' %}?restaurantid={{ review.restaurantid }}">戻る</a>
-    <a type="submit" class="btn btn-danger" href="{% url 'reviewlist' %}?restaurantid={{ review.restaurantid }}">削除</a>
+    <th>予約者：</th>{{ reservation.username }}<br>
+    <th>店舗ID：</th>{{ reservation.restaurantid }}<br>
+    <th>予約日：</th>{{ reservation.reservationdate }}<br>
+    <th>予約人数：</th>{{ reservation.numberofpeople }}<br>
+    <th>開始時間：</th>{{ reservation.starttime }}<br>
+    <th>終了時間：</th>{{ reservation.endtime }}<br><br>
+ 
+    <a href="{% url 'reservation_list' %}?restaurantid={{ reservation.username }}">戻る</a>
     <input type="submit" class="btn btn-danger" value="削除">
 </form>
 {% endblock %}

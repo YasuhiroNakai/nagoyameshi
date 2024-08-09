@@ -10,8 +10,8 @@
     {{ form|bootstrap }}
     
     <br>
-    <a href="{% url 'reservation_list' %}?restaurantid={{ review.restaurantid }}">戻る</a>
-    <form action="{% url 'reservation_list' %}?restaurantid={{ review.restaurantid }}" method="get">
+    <a href="{% url 'reservation_list' %}?restaurantid={{ reservation.restaurantid }}">戻る</a>
+    <form action="{% url 'reservation_list' %}?restaurantid={{ reservation.restaurantid }}" method="get">
         <input type="submit" class="btn btn-primary" value="更新">
     </form>
 </form>
